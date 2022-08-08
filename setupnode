@@ -8,7 +8,7 @@
 #
 # Run as root or insert `sudo -E` before `bash`:
 #
-# curl -skLf https://deb.nodesource.com/setup_14.x | bash -
+# curl -sSkLf https://deb.nodesource.com/setup_14.x | bash -
 #   or
 # wget -qO- https://deb.nodesource.com/setup_14.x | bash -
 #
@@ -303,7 +303,7 @@ fi
 print_status "Confirming \"${DISTRO}\" is supported..."
 
 if [ -x /usr/bin/curl ]; then
-    exec_cmd_nobail "curl -skLf -o /dev/null 'https://deb.nodesource.com/${NODEREPO}/dists/${DISTRO}/Release'"
+    exec_cmd_nobail "curl -sSkLf -o /dev/null 'https://deb.nodesource.com/${NODEREPO}/dists/${DISTRO}/Release'"
     RC=$?
 else
     exec_cmd_nobail "wget -qO /dev/null -o /dev/null 'https://deb.nodesource.com/${NODEREPO}/dists/${DISTRO}/Release'"
@@ -328,7 +328,7 @@ node_key_url="https://deb.nodesource.com/gpgkey/nodesource.gpg.key"
 local_node_key="$keyring/nodesource.gpg"
 
 if [ -x /usr/bin/curl ]; then
-    exec_cmd "curl -skLf $node_key_url | gpg --dearmor | tee $local_node_key >/dev/null"
+    exec_cmd "curl -sSkLf $node_key_url | gpg --dearmor | tee $local_node_key >/dev/null"
 else
     exec_cmd "wget -q -O - $node_key_url | gpg --dearmor | tee $local_node_key >/dev/null"
 fi
@@ -350,7 +350,7 @@ print_status """Run \`${bold}sudo apt-get install -y ${NODEPKG}${normal}\` to in
 ## You may also need development tools to build native addons:
      sudo apt-get install gcc g++ make
 ## To install the Yarn package manager, run:
-     curl -skLf $yarn_key_url | gpg --dearmor | sudo tee $local_yarn_key >/dev/null
+     curl -sSkLf $yarn_key_url | gpg --dearmor | sudo tee $local_yarn_key >/dev/null
      echo \"deb [signed-by=$local_yarn_key] $yarn_site stable main\" | sudo tee /etc/apt/sources.list.d/yarn.list
      sudo apt-get update && sudo apt-get install yarn
 """
